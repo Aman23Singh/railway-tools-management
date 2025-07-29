@@ -47,3 +47,23 @@ export const deleteTodo = async (req, res) => {
   }
 };
 
+export const updateTodo = async (req, res) => {
+  const { id } = req.params;
+  const { department, tool, quantity } = req.body;
+
+  try {
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id,
+      { department, tool, quantity },
+      { new: true }
+    );
+
+    if (!updatedTodo) {
+      return res.status(404).json({ message: 'Todo not found' });
+    }
+
+    res.json(updatedTodo);
+  } catch {
+    res.status(500).json({ message: 'Failed to update todo' });
+  }
+};

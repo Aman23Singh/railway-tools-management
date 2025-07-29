@@ -8,6 +8,9 @@ const Todo = () => {
   const [tools, setTools] = useState([]);
   const [tool, setTool] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editTool, setEditTool] = useState('');
+  const [editQuantity, setEditQuantity] = useState('');
 
   useEffect(() => {
     if (!user) return;
@@ -46,6 +49,24 @@ const Todo = () => {
       const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
       await axios.delete(`${API}/todo/${id}`);
       setTools(tools.filter((item) => item._id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleUpdate = async (id) => {
+    try {
+      const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      await axios.put(`${API}/todo/${id}`, {
+        tool: editTool,
+        quantity: editQuantity,
+      });
+      setTools(
+        tools.map((item) =>
+          item._id === id ? { ...item, tool: editTool, quantity: editQuantity } : item
+        )
+      );
+      setEditingId(null);
     } catch (err) {
       console.error(err);
     }
@@ -99,15 +120,52 @@ const Todo = () => {
                   key={item._id}
                   className="flex items-center justify-between bg-gray-100 rounded-md px-4 py-3 shadow-sm hover:bg-gray-200 transition"
                 >
-                  <span className="text-gray-800 font-medium">
-                    {item.tool} - {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => handleDelete(item._id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                  {editingId === item._id ? (
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <input
+                        value={editTool}
+                        onChange={(e) => setEditTool(e.target.value)}
+                        className="p-1 border rounded"
+                      />
+                      <input
+                        value={editQuantity}
+                        onChange={(e) => setEditQuantity(e.target.value)}
+                        className="p-1 border rounded w-20"
+                      />
+                    </div>
+                  ) : (
+                    <span className="text-gray-800 font-medium">
+                      {item.tool} - {item.quantity}
+                    </span>
+                  )}
+
+                  <div className="flex gap-3 items-center">
+                    {editingId === item._id ? (
+                      <button
+                        onClick={() => handleUpdate(item._id)}
+                        className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 text-sm"
+                      >
+                        Update
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setEditingId(item._id);
+                          setEditTool(item.tool);
+                          setEditQuantity(item.quantity);
+                        }}
+                        className="px-3 py-1 bg-emerald-400 text-white rounded hover:bg-emerald-600 text-sm"
+                      >
+                        Edit
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="p-2 bg-red-400 text-white rounded hover:bg-red-600"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

@@ -5,6 +5,7 @@ import {
   getTodosByDepartment,
   addTodo,
   deleteTodo,
+  updateTodo,
 } from '../Controllers/TodoController.js';
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.get('/todo', getAllTodos);
 router.get('/todo/:department', getTodosByDepartment);
 router.post('/todo', addTodo);
 router.delete('/todo/:id', deleteTodo);
+router.put('/todo/:id', updateTodo); 
 
 export default router;
