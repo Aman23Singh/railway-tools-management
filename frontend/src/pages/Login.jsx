@@ -19,10 +19,8 @@ function Login() {
     try {
       const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
       const res = await axios.post(`${API}/login`, form);
-
       const { token, user, message } = res.data;
 
-      // ✅ Combine token with userData before passing to context
       const userData = { ...user, token };
       login(userData);
 
@@ -37,41 +35,43 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={handleChange}
-          value={form.email}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          value={form.password}
-          required
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      <p className="text-center mt-4 text-sm">
-        Don't have an account?{' '}
-        <Link to="/signup" className="text-blue-600 hover:underline">
-          Signup
-        </Link>
-      </p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-gray-200">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">🔐 Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            value={form.email}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            value={form.password}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium transition"
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+        <p className="text-center mt-6 text-sm text-gray-600">
+          Don't have an account?{' '}
+          <Link to="/signup" className="text-purple-600 hover:underline font-medium">
+            Signup
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

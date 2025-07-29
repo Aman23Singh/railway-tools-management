@@ -31,36 +31,46 @@ const FrontPage = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 mb-[400px]">
-      <h1 className="text-2xl font-bold mb-[50px] mt-[20px] mx-auto w-[300px]">Department List</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-        {departments.map((dept) => (
-          <div
-            key={dept}
-            onClick={() => handleClick(dept)}
-            className="cursor-pointer border p-4 rounded shadow hover:bg-blue-50"
-          >
-            <h2 className="text-lg font-semibold text-center">{dept}</h2>
-          </div>
-        ))}
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 py-10 px-4">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-10 underline underline-offset-4">
+          Department List
+        </h1>
 
-      {selectedDept && (
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Tools in "{selectedDept}" Department:</h2>
-          {todoData.length === 0 ? (
-            <p>No tools found.</p>
-          ) : (
-            <ul className="space-y-2">
-              {todoData.map((tool) => (
-                <li key={tool._id} className="border p-2 rounded">
-                  {tool.tool} - {tool.quantity}
-                </li>
-              ))}
-            </ul>
-          )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+          {departments.map((dept) => (
+            <div
+              key={dept}
+              onClick={() => handleClick(dept)}
+              className="cursor-pointer bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-transform text-center border-t-4 border-purple-400"
+            >
+              <h2 className="text-xl font-semibold text-purple-700">{dept}</h2>
+            </div>
+          ))}
         </div>
-      )}
+
+        {selectedDept && (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Tools in "{selectedDept}" Department:
+            </h2>
+            {todoData.length === 0 ? (
+              <p className="text-gray-600">No tools found.</p>
+            ) : (
+              <ul className="space-y-3">
+                {todoData.map((tool) => (
+                  <li
+                    key={tool._id}
+                    className="bg-gray-100 p-4 rounded-md border-l-4 border-indigo-400 shadow-sm"
+                  >
+                    <span className="font-medium">{tool.tool}</span> — Quantity: {tool.quantity}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

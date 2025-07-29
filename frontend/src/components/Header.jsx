@@ -12,24 +12,23 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm py-3 px-6 flex justify-between items-center sticky top-0 z-50">
-      <Link to="/" className="text-xl font-semibold text-gray-800">
-        🚂 Railway Tools Management
+    <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+      <Link to="/" className="text-xl sm:text-2xl font-bold text-gray-800 hover:text-blue-600 transition">
+        🚂 Railway Tools
       </Link>
 
-      <ul className="flex items-center gap-6 text-sm text-gray-600">
+      <ul className="flex items-center gap-4 sm:gap-6 text-sm sm:text-base font-medium text-gray-600">
         {user ? (
           <>
             <li>
-              <Link to="/todo" className="hover:text-black transition">Dashboard</Link>
+              <Link to="/todo" className="hover:text-blue-600 transition">
+                Dashboard
+              </Link>
             </li>
-            {/* <li>
-              <Link to="/todo" className="hover:text-black transition">Add Tools</Link>
-            </li> */}
             <li>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-md transition"
               >
                 Logout
               </button>
@@ -39,7 +38,7 @@ const Header = () => {
           <li>
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition"
+              className="bg-blue-600 text-white px-4 py-1.5 rounded-md hover:bg-blue-700 transition"
             >
               Login
             </Link>
