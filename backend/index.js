@@ -14,8 +14,8 @@ const PORT = process.env.PORT || 8080;
 
 // app.use(cors());
 app.use(cors({
-  origin: 'https://railway-tools-management-fne7.vercel.app/', // ✅ replace with your actual frontend URL
-  credentials: true, // ✅ if using cookies or sessions
+  origin: ['https://railway-tools-management-fne7.vercel.app/'], // replace with your actual Vercel domain
+  credentials: true,
 }));
 app.use(express.json());
 
