@@ -6,7 +6,7 @@ const FrontPage = () => {
   const [selectedDept, setSelectedDept] = useState(null);
   const [todoData, setTodoData] = useState([]);
 
-  const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management.onrender.com';
 
   useEffect(() => {
     const fetchDepartments = async () => {

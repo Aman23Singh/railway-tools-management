@@ -11,7 +11,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
+      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management.onrender.com';
       await axios.post(`${API}/signup`, form);
       alert('Signup successful');
       navigate('/login');
