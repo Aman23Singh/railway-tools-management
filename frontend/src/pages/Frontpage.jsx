@@ -6,7 +6,7 @@ const FrontPage = () => {
   const [selectedDept, setSelectedDept] = useState(null);
   const [todoData, setTodoData] = useState([]);
 
-  const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchDepartments = async () => {
