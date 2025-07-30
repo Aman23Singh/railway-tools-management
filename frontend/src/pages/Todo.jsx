@@ -16,7 +16,7 @@ const Todo = () => {
     if (!user) return;
     const fetchTools = async () => {
       try {
-        const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+        const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
         const res = await axios.get(`${API}/todo/${user.department}`);
         setTools(res.data);
       } catch (err) {
@@ -29,7 +29,7 @@ const Todo = () => {
   const handleAdd = async () => {
     if (!tool || !quantity || !user) return;
     try {
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
       const res = await axios.post(`${API}/todo`, {
         email: user.email,
         department: user.department,
@@ -46,7 +46,7 @@ const Todo = () => {
 
   const handleDelete = async (id) => {
     try {
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
       await axios.delete(`${API}/todo/${id}`);
       setTools(tools.filter((item) => item._id !== id));
     } catch (err) {
@@ -56,7 +56,7 @@ const Todo = () => {
 
   const handleUpdate = async (id) => {
     try {
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
       await axios.put(`${API}/todo/${id}`, {
         tool: editTool,
         quantity: editQuantity,

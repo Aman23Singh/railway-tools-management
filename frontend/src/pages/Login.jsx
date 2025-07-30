@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const API = import.meta.env.VITE_API_URL || 'https://railway-tools-management-oehh.vercel.app/';
       const res = await axios.post(`${API}/login`, form);
       const { token, user, message } = res.data;
 
